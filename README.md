@@ -17,7 +17,7 @@ Version: 1.0.3.12
 Converts all dates in posts and pages to Bitcoin block numbers.
 
 Code repo on [GitHub](https://github.com/SuperAtic-LABS/Bitcoin-Block-Date-Converter/)
-Demo [site](https://veintiuno.world/e/%F0%9F%9F%A0%F0%9F%98%81/)
+Demo [site]()
 
 ![](https://github.com/SuperAtic-LABS/Bitcoin-Block-Date-Converter/blob/main/screenshot-1.png)
 ![](https://github.com/SuperAtic-LABS/Bitcoin-Block-Date-Converter/blob/main/screenshot-2.png)
