@@ -3,9 +3,11 @@
 Plugin Name: Bitcoin Block Date Converter
 Plugin URI: https://SuperAtic.net
 Description: Converts all dates in posts and pages to Bitcoin block numbers.
-Version: 1.0.3.12
+Version: 1.0.3.13
 Author: SuperAtic inc.
 Author URI: https://SuperAtic.com
+Text Domain: bitcoin-block-date-converter
+Domain Path: /languages
 */
 
 // Convert date to Bitcoin block number
@@ -28,13 +30,20 @@ function convert_date_to_block_number($the_date, $d, $post) {
     $block_link = '<a href="https//mempool.space/block/' . $block_number . '" >' . $block_number . '</a>';
 
     if ($date_display_option == 'block') {
-        return wp_kses('Bitcoin block: ' . $block_number, array( 'a' => array( 'href' => array() ) ));
+        return wp_kses(__('Bitcoin block: ', 'bitcoin-block-date-converter') . $block_number, array( 'a' => array( 'href' => array() ) ));
     } else {
-        return wp_kses($the_date . ' - Bitcoin block: ' . $block_number , array( 'a' => array( 'href' => array() ) ));
+        return wp_kses($the_date . __(' - Bitcoin block: ', 'bitcoin-block-date-converter') . $block_number , array( 'a' => array( 'href' => array() ) ));
     }
 }
 
 add_filter('get_the_date', 'convert_date_to_block_number', 20, 3); // Increased priority to 20 to make sure our function runs last
+
+// Load plugin text domain
+function bbd_load_textdomain() {
+    load_plugin_textdomain( 'bitcoin-block-date-converter', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
+}
+
+add_action('plugins_loaded', 'bbd_load_textdomain');
 
 // Add setting to General Settings page
 function add_date_display_option_setting() {
@@ -42,7 +51,7 @@ function add_date_display_option_setting() {
 
     add_settings_field(
         'date_display_option',
-        'Date display option',
+        __('Date display option', 'bitcoin-block-date-converter'),
         'date_display_option_setting_html',
         'general'
     );
@@ -54,9 +63,9 @@ add_action('admin_init', 'add_date_display_option_setting');
 function date_display_option_setting_html() {
     $date_display_option = get_option('date_display_option', 'normal');
     $options = array(
-        'normal' => 'Normal date',
-        'block' => 'Bitcoin block',
-        'both' => 'Both',
+        'normal' => __('Normal date', 'bitcoin-block-date-converter'),
+        'block' => __('Bitcoin block', 'bitcoin-block-date-converter'),
+        'both' => __('Both', 'bitcoin-block-date-converter'),
     );
     echo '<select id="date_display_option" name="date_display_option">';
     foreach ($options as $value => $label) {
@@ -67,7 +76,7 @@ function date_display_option_setting_html() {
 
 // Add settings link to plugin actions
 function add_settings_link($links) {
-    $settings_link = '<a href="options-general.php">' . __('Settings') . '</a>';
+    $settings_link = '<a href="options-general.php">' . __('Settings', 'bitcoin-block-date-converter') . '</a>';
     array_unshift($links, $settings_link);
     return $links;
 }
