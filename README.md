@@ -1,5 +1,5 @@
 
-![](https://github.com/SuperAtic-LABS/Bitcoin-Block-Date-Converter/blob/main/bitcoin-block-date-converter.png)
+![](https://github.com/SuperAtic-LABS/Bitcoin-Block-Date-Converter/blob/main/Bitcoin-Block-Date-Converter_Logo.png)
 
 # Bitcoin-Block-Date-Converter
 Converts all dates in posts and pages to Bitcoin block numbers.
